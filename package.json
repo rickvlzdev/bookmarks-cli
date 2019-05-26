@@ -1,0 +1,19 @@
+{
+  "name": "bookmarks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rick Veloz <rickvelozdev@gmail.com> (http://www.rickvelozdev.com)",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.0.18",
+    "commander": "^2.20.0",
+    "lodash": "^4.17.11",
+    "sequelize": "^5.8.6",
+    "sqlite3": "^4.0.8"
+  }
+}
