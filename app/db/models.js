@@ -125,7 +125,20 @@ module.exports = (sequelize, Sequelize) => {
       }
     })();
   });
-  class Tag extends Sequelize.Model {}
+  class Tag extends Sequelize.Model {
+    static serializeArray(instances, options) {
+      const {short, complete} = options;
+      let tags;
+      if (short) {
+        tags = instances.map(({keyword}) => keyword);
+      } else if (complete) {
+        tags = instances.map(instance => instance.get({plain: true}));
+      } else {
+        tags = instances.map(({keyword}) => ({keyword}));
+      }
+      return tags;
+    }
+  }
   Tag.init({
     id: {
       type: Sequelize.BIGINT,

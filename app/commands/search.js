@@ -33,8 +33,12 @@ const searchByFields = async (query, options) => {
 
 const searchByTags = async (query, options) => {
   try {
-    const {intersection} = options;
+    const {strict, backwards, limit} = options;
     let articleInstances = await db.Article.findAll({
+      order: [
+        ['createdAt', backwards ? 'ASC' : 'DESC'],
+      ],
+      limit,
       include: [{
         model: db.Tag,
         where: {
@@ -44,7 +48,7 @@ const searchByTags = async (query, options) => {
         },
       }],
     });
-    if (intersection) {
+    if (strict) {
       // temporary solution to intersection search
       const tagsInstances = await db.Tag.findAll({
         where: {
@@ -53,6 +57,16 @@ const searchByTags = async (query, options) => {
           }
         },
       });
+      // if a tag does not exist throw error and show which tags don't exist
+      const nonExistingTags = query.filter((subquery) => {
+        return !db.Tag.serializeArray(tagsInstances, {
+          short: true,
+        }).includes(subquery.toLowerCase());
+      });
+      if (nonExistingTags.length > 0) {
+        const errorMessage = nonExistingTags.join(', ')
+        throw new Error(`Following tags don't exist: ${errorMessage}\n`);
+      }
       for(let articleInstance of articleInstances) {
         const hasAllTags = await articleInstance.hasTags(tagsInstances);
         // if the article does not have all tags remove from instances array
