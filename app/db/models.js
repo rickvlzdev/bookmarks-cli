@@ -143,6 +143,13 @@ module.exports = (sequelize, Sequelize) => {
     tableName: 'tag',
     underscored: true,
   });
+  // before create and update make sure keyword is lowercase
+  Tag.beforeCreate((tag) => {
+    tag.keyword = tag.keyword.toLowerCase();
+  });
+  Tag.beforeUpdate((tag) => {
+    tag.keyword = tag.keyword.toLowerCase();
+  });
   class ArticleTag extends Sequelize.Model {}
   ArticleTag.init({}, {
     sequelize,
