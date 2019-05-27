@@ -5,8 +5,8 @@ program.version('0.1.0');
 
 program
   .command('list')
-  .option('-l --limit <limit>', 'List the n most recent articles', 5)
-  .option('-a --all', 'Show when article was created and updated')
+  .option('-l --limit <limit>', 'list n most recent articles', 5)
+  .option('-a --all', 'show when article was created and updated')
   .action(async (cmd) => {
     try {
       const data = {};
@@ -24,7 +24,7 @@ program
 
 program
   .command('add <title> <url> [tags...]')
-  .option('-a --all', 'Show when article was created and updated')
+  .option('-a --all', 'show when article was created and updated')
   .action(async (title, uniformResourceLocator, tags, cmd) => {
     try {
       const data = {
@@ -51,7 +51,7 @@ program
   .option('-b --backwards', 'order by oldest articles')
   .option('-l --limit <limit>', 'List the n most recent articles', 100)
   .option('-s --strict', 'retrieve articles that have all tags')
-  .option('-a --all', 'Show when article was created and updated')
+  .option('-a --all', 'show when article was created and updated')
   .action(async (query, cmd) => {
     try {
       const data = {query};
@@ -74,7 +74,7 @@ program
 
 program
   .command('remove <nickname>')
-  .option('-a --all', 'Show when article was created and updated')
+  .option('-a --all', 'show when article was created and updated')
   .action(async (nickname, cmd) => {
     try {
       const data = {
