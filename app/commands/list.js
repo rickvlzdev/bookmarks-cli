@@ -1,11 +1,12 @@
 const db = require('../db');
-const getLatestArticles = async (numberOfArticles = 10) => {
+const getLatestArticles = async (data, options) => {
   try {
+    const {limit = 10, all: complete = false} = options;
     const articleInstances = await db.Article.findAll({
       order: [['id', 'DESC']],
-      limit: numberOfArticles,
+      limit,
     });
-    const articles = await db.Article.serializeArray(articleInstances);
+    const articles = await db.Article.serializeArray(articleInstances, complete);
     return articles;
   } catch (err) {
     console.log(err);

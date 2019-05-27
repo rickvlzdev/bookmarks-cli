@@ -1,8 +1,9 @@
 const db = require('../db');
 
-const addOneArticle = async (plainObj) => {
+const addOneArticle = async (data, options) => {
   try {
-    const {title, uniformResourceLocator} = plainObj;
+    const {title, uniformResourceLocator} = data;
+    const {all: complete = false} = options;
     const count = await db.Article.count({
       where: {
         [db.Op.or]: [
@@ -16,10 +17,10 @@ const addOneArticle = async (plainObj) => {
       },
     });
     if (count > 0) {
-      throw new Error('Article already exists.')
+      throw new Error('Article already exists.\n')
     }
-    const article = await db.Article.deserialize(plainObj);
-    return article;
+    const article = await db.Article.deserialize(data, complete);
+    return [article];
   } catch (err) {
     process.stderr.write(err.toString());
   }

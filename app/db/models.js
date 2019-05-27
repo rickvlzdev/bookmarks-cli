@@ -6,6 +6,7 @@ module.exports = (sequelize, Sequelize) => {
     async serialize(complete = false) {
       try {
         const article = this.get({plain: true});
+        delete article.Tags
         // delete createdAt and updatedAt properties if complete is false
         if (!complete) {
           delete article.createdAt;
@@ -31,7 +32,7 @@ module.exports = (sequelize, Sequelize) => {
       }
     }
     // convert plain object into a non-persistent instance
-    static async deserialize(plainObj) {
+    static async deserialize(plainObj, complete = false) {
       try {
         const {
           title,
@@ -48,7 +49,16 @@ module.exports = (sequelize, Sequelize) => {
           uniformResourceLocator,
         });
         await articleInstance.addTags(tagInstances);
-        return plainObj;
+        const {nickname} = articleInstance;
+        const article = {
+          ...plainObj,
+          nickname,
+        };
+        if (complete) {
+          article.createdAt = articleInstance.createdAt;
+          article.updatedAt = articleInstance.updatedAt;
+        }
+        return article;
       } catch (err) {
         process.stderr.write(err.toString());
       }

@@ -1,6 +1,8 @@
 const db = require('../db');
-const searchByFields = async (query, options) => {
+const searchByFields = async (data, options) => {
   try {
+    const {query} = data;
+    const {backwards, limit, all: complete = false} = options;
     const filterFields = [
       'nickname',
       'title',
@@ -14,7 +16,6 @@ const searchByFields = async (query, options) => {
         }
       }
     });
-    const {backwards, limit} = options;
     const articleInstances = await db.Article.findAll({
       where: {
         [db.Op.or]: filterOptions,
@@ -24,16 +25,17 @@ const searchByFields = async (query, options) => {
       ],
       limit,
     });
-    const articles = await db.Article.serializeArray(articleInstances);
+    const articles = await db.Article.serializeArray(articleInstances, complete);
     return articles;
   } catch (err) {
     process.stderr.write(err.toString())
   }
 };
 
-const searchByTags = async (query, options) => {
+const searchByTags = async (data, options) => {
   try {
-    const {strict, backwards, limit} = options;
+    let {query} = data;
+    const {strict, backwards, limit, all: complete = false} = options;
     let articleInstances = await db.Article.findAll({
       order: [
         ['createdAt', backwards ? 'ASC' : 'DESC'],
@@ -67,19 +69,20 @@ const searchByTags = async (query, options) => {
         const errorMessage = nonExistingTags.join(', ')
         throw new Error(`Following tags don't exist: ${errorMessage}\n`);
       }
+      const filteredArticleInstances = [];
       for(let articleInstance of articleInstances) {
         const hasAllTags = await articleInstance.hasTags(tagsInstances);
         // if the article does not have all tags remove from instances array
-        if (!hasAllTags) {
-          const index = articleInstances.indexOf(articleInstance);
-          if (index > -1) articleInstances.splice(index, 1);
+        if (hasAllTags) {
+          filteredArticleInstances.push(articleInstance);
         }
       }
+      articleInstances = filteredArticleInstances;
     }
-    const articles = await db.Article.serializeArray(articleInstances);
+    const articles = await db.Article.serializeArray(articleInstances, complete);
     return articles;
   } catch (err) {
-    process.stderr.write(err.toString());
+    process.stderr.write(err.toString() + '\n');
   }
 };
 
