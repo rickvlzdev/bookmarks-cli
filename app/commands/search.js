@@ -1,7 +1,7 @@
 const db = require('../db');
 const searchByFields = async (data, options) => {
   try {
-    const {query} = data;
+    const query = data.query.map(subquery => subquery.toLowerCase());
     const {backwards, limit, all: complete = false} = options;
     const filterFields = [
       'nickname',
@@ -12,7 +12,7 @@ const searchByFields = async (data, options) => {
     filterFields.forEach((field) => {
       if (options[field]) {
         for(let subquery of query) {
-          filterOptions.push({[field]: {[db.Op.substring]: `%${subquery}%`}});
+          filterOptions.push({[field]: {[db.Op.substring]: `${subquery}`}});
         }
       }
     });
@@ -28,13 +28,13 @@ const searchByFields = async (data, options) => {
     const articles = await db.Article.serializeArray(articleInstances, complete);
     return articles;
   } catch (err) {
-    process.stderr.write(err.toString())
+    process.stderr.write(err.toString() + '\n')
   }
 };
 
 const searchByTags = async (data, options) => {
   try {
-    let {query} = data;
+    const query = data.query.map(subquery => subquery.toLowerCase());
     const {strict, backwards, limit, all: complete = false} = options;
     let articleInstances = await db.Article.findAll({
       order: [

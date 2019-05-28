@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const program = require('commander');
 const getCommand = require('./app/commands');
 
@@ -39,7 +40,7 @@ program
       process.stdout.write(summary);
       process.stdout.write(results);
     } catch (err) {
-      process.stderr.write(err.toString());
+      process.stderr.write(err.toString() + '\n');
     }
   });
 
@@ -49,8 +50,8 @@ program
   .option('-t --title', 'search by title')
   .option('-u --uniformResourceLocator', 'search by URL')
   .option('-b --backwards', 'order by oldest articles')
-  .option('-l --limit <limit>', 'List the n most recent articles', 100)
-  .option('-s --strict', 'retrieve articles that have all tags')
+  .option('-l --limit <limit>', 'list the n most recent articles', 10)
+  .option('-s --strict', 'retrieve articles that have every tags')
   .option('-a --all', 'show when article was created and updated')
   .action(async (query, cmd) => {
     try {
@@ -87,7 +88,7 @@ program
       process.stdout.write(summary);
       process.stdout.write(results);
     } catch (err) {
-      process.stderr.write(err.toString());
+      process.stderr.write(err.toString() + '\n');
     }
 
   });

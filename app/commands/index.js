@@ -23,16 +23,10 @@ module.exports = async (command, data, options) => {
         end = now();
         break;
       }
-      case 'remove': {
-        start = now();
-        articles = await remove.removeOneArticle(data, options);
-        end = now();
-        break;
-      }
       case 'search': {
         start = now();
-        const {title, url, nickname} = options;
-        if (title || url || nickname) {
+        const {title, uniformResourceLocator, nickname} = options;
+        if (title || uniformResourceLocator || nickname) {
           articles = await search.searchByFields(data, options);
         } else {
           articles = await search.searchByTags(data, options);
@@ -40,8 +34,14 @@ module.exports = async (command, data, options) => {
         end = now();
         break;
       }
+      case 'remove': {
+        start = now();
+        articles = await remove.removeOneArticle(data, options);
+        end = now();
+        break;
+      }
       default: {
-        throw new Error('Command not found');
+        throw new Error('Command not found\n');
       }
     }
     const summary = print.summary(articles, ((end - start) / 1000).toFixed(3));

@@ -2,7 +2,7 @@ const chalk = require('chalk');
 
 const results = (articles = []) => {
   if (articles.length === 0) {
-    return 'No articles found.';
+    return 'No articles found.\n';
   }
   let output = '';
   articles.forEach((article, index) => {

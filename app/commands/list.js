@@ -9,7 +9,7 @@ const getLatestArticles = async (data, options) => {
     const articles = await db.Article.serializeArray(articleInstances, complete);
     return articles;
   } catch (err) {
-    console.log(err);
+    process.stderr.write(err.toString() + '\n');
   }
 };
 
