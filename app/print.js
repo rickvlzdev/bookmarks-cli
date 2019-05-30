@@ -34,7 +34,12 @@ const summary = (articles = [], time = '0.000') => {
   return chalk.bold.green(`results: ${items} item(s), time: ${time} seconds\n`);
 };
 
+const error = (err) => {
+  return chalk.bold.red(err.toString() + '\n');
+}
+
 module.exports = {
   results,
   summary,
+  error,
 };
