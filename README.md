@@ -4,15 +4,15 @@ A command-line tool for storing links to online articles, along with some tags.
 
 ## Installation and Setup
 
-1. Install Node.js & SQLite if don't have them installed
+1. Install Node.js & SQLite
 
-2. Clone repository and install its dependencies
+2. Clone Repository and Install Dependencies
 ```
 $ git clone https://github.com/rickvlzdev/bookmarks-cli bookmarks
 $ cd bookmarks
 $ npm install
 ```
-3. Initialize Database
+3. Initialize Database\
 with sample data
 ```
 $ npm run init
@@ -22,7 +22,7 @@ or with no sample data
 $ npm run init-empty
 ```
 
-4. Create Executable (optional)
+4. Create Executable (optional)\
 add exectable file permissions
 ```
 $ sudo chmod +x index.js
@@ -42,5 +42,8 @@ $ PATH='path/to/project/directory':${PATH}
 ### Add Command
 To add an article along with some tags
 ```
-$ bookmarks add "An Introduction to Javascript Programming" "http://jsprogramming.com/articles" javascript programming introduction tutorial
+$ bookmarks add \
+> "An Introduction to Javascript Programming" \ (title)
+> "http://jsprogramming.com/articles" \ (link)
+> javascript programming introduction tutorial \ (tags)
 ```
