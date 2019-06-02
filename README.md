@@ -5,7 +5,7 @@ A command-line tool for storing links to online articles, along with some tags.
 ## Installation and Setup
 
 ### Install Node.js & SQLite
-[Node.js](https://nodejs.org/en/)
+[Node.js](https://nodejs.org/en/)\
 [SQLite](https://www.sqlite.org/download.html)
 
 ### Clone Repository and Install Dependencies
