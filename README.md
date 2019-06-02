@@ -35,15 +35,29 @@ add to environment variable PATH
 ```
 $ PATH='path/to/project/directory':${PATH}
 ```
-(The section below assumes you followed this step. If you did not, just replace all occurrences of 'bookmarks' with 'node index.js').
+The section below assumes you followed this step. If you did not, just replace all occurrences of 'bookmarks' with 'node index.js'.
 
 ## Usage
 
-### Add Command
-To add an article along with some tags
+### **Add** Command
+Add an article along with some tags
 ```
 $ bookmarks add \
-> "An Introduction to Javascript Programming" \ (title)
-> "http://jsprogramming.com/articles" \ (link)
-> javascript programming introduction tutorial \ (tags)
+> "An Introduction to Javascript Programming" \
+> "http://jsprogramming.com/articles" \
+> 'javascript' 'programming' 'introduction' 'tutorial' \
 ```
+### **List** Command
+List recently added articles
+```
+$ bookmarks list
+```
+Output
+```
+title An Introduction to Javascript Programming
+url http://jsprogramming.com/articles
+tags 'javascript' 'programming' 'introduction' 'tutorial'
+nickname ob_hasegawa_bat
+```
+* `-l <n>` show n most recent articles
+* nickname field is a unique identifier to refer to an article entry
