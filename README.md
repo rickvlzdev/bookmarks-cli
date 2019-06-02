@@ -66,7 +66,8 @@ nickname ob_hasegawa_bat
 ```
 Options
 * `-l --limit <n>` show *n* most recent articles
-* `-a --all` show when article was created and updated\\
+* `-a --all` show when article was created and updated\
+\
 `nickname` field is a unique identifier to refer to an article entry
 
 ### Search Command
@@ -81,7 +82,8 @@ Options
 * `-u --uniformResourceLocator` search by URL
 * `-b --backwards` order by oldest articles
 * `-l limit <n>` show *n* most recent articles
-* `-a --all` show when article was created and updated\\
+* `-a --all` show when article was created and updated\
+\
 Nickname, title, and URL options can be set at once. To enable tag search exclude title, nickname, URL options
 
 ### Remove Command
