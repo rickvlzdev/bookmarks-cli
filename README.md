@@ -3,6 +3,8 @@
 A command-line tool for storing links to online articles, along with some tags.
 
 ## Installation and Setup
+[Node.js](https://nodejs.org/en/)
+[SQLite](https://www.sqlite.org/download.html)
 
 ### Install Node.js & SQLite
 
@@ -64,7 +66,7 @@ nickname ob_hasegawa_bat
 ```
 Options
 * `-l --limit <n>` show *n* most recent articles
-* `-a --all` show when article was created and updated
+* `-a --all` show when article was created and updated\
 More Information
 * `nickname` field is a unique identifier to refer to an article entry
 
@@ -80,7 +82,7 @@ Options
 * `-u --uniformResourceLocator` search by URL
 * `-b --backwards` order by oldest articles
 * `-l limit <n>` show *n* most recent articles
-* `-a --all` show when article was created and updated
+* `-a --all` show when article was created and updated\
 More Information
 * Nickname, title, and URL options can be set at once.
 * To enable tag search exclude title, nickname, URL options
