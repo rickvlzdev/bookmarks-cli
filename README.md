@@ -4,15 +4,15 @@ A command-line tool for storing links to online articles, along with some tags.
 
 ## Installation and Setup
 
-1. Install Node.js & SQLite
+### Install Node.js & SQLite
 
-2. Clone Repository and Install Dependencies
+### Clone Repository and Install Dependencies
 ```
 $ git clone https://github.com/rickvlzdev/bookmarks-cli bookmarks
 $ cd bookmarks
 $ npm install
 ```
-3. Initialize Database\
+### Initialize Database
 with sample data
 ```
 $ npm run init
@@ -22,7 +22,7 @@ or with no sample data
 $ npm run init-empty
 ```
 
-4. Create Executable (optional)\
+### Create Executable (optional)\
 add exectable file permissions
 ```
 $ sudo chmod +x index.js
