@@ -8,8 +8,8 @@ A command-line tool for storing links to online articles, along with some tags.
 
 2. Clone repository and install its dependencies
 
-  > git clone https://github.com/rickvlzdev/bookmarks-cli bookmarks
-  > cd bookmarks
-  > npm install
+  $ git clone https://github.com/rickvlzdev/bookmarks-cli bookmarks
+  $ cd bookmarks
+  $ npm install
 
 3. Initialize database
