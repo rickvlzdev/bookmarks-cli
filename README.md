@@ -35,7 +35,7 @@ $ ln -s index.js bookmarks
 ```
 add to environment variable PATH
 ```
-$ PATH='path/to/project/directory':${PATH}
+$ PATH=$(pwd):${PATH}
 ```
 The section below assumes you followed this step. If you did not, just replace all occurrences of 'bookmarks' with 'node index.js'.
 
