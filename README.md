@@ -93,3 +93,48 @@ $ bookmarks remove ob_hasegawa_bat
 ```
 Options
 * `-a --all` show when article was created and updated
+
+## Accessing Database Directly
+Begin client session.
+```
+$ sqlite3 db.sqlite
+```
+Get all article ids, titles, creation dates & times, and nicknames.
+```
+sqlite> SELECT title, created_at nickname FROM article;
+id          title                                           created_at                      nickname            
+----------  ----------------------------------------------  ------------------------------  --------------------
+1           How to test Express.js with Jest and Supertest  2019-06-07 01:14:09.970 +00:00  vof_costantini_eagle
+2           How to escape async/await hell                  2019-06-07 01:14:10.006 +00:00  ibvob_benvenuti_guan
+3           Setting Default Values with JavaScript’s Destr  2019-06-07 01:14:10.021 +00:00  jijetiinu_breton_mul
+4           Teach yourself C++ — Where to start             2019-06-07 01:14:10.039 +00:00  zos_de_waal_raven   
+5           How To Secure a Containerized Node.js Applicat  2019-06-07 01:14:10.092 +00:00  tih_lees_addax      
+6           { Writing API Tests with Jest. }                2019-06-07 01:14:10.120 +00:00  nabecvoh_schofield_g
+7           5 Easy Steps to Understanding JSON Web Tokens   2019-06-07 01:14:10.154 +00:00  pihpi_briggs_pigs_an
+...
+```
+Get all tags.
+```
+sqlite> SELECT * FROM tag;
+id          keyword     created_at                      updated_at                    
+----------  ----------  ------------------------------  ------------------------------
+1           javascript  2019-06-07 01:14:09.938 +00:00  2019-06-07 01:14:09.938 +00:00
+2           jest        2019-06-07 01:14:09.959 +00:00  2019-06-07 01:14:09.959 +00:00
+3           testing     2019-06-07 01:14:09.967 +00:00  2019-06-07 01:14:09.967 +00:00
+4           async/awai  2019-06-07 01:14:10.000 +00:00  2019-06-07 01:14:10.000 +00:00
+5           asynchrono  2019-06-07 01:14:10.004 +00:00  2019-06-07 01:14:10.004 +00:00
+6           destructur  2019-06-07 01:14:10.019 +00:00  2019-06-07 01:14:10.019 +00:00
+7           c++         2019-06-07 01:14:10.033 +00:00  2019-06-07 01:14:10.033 +00:00
+...
+```
+Show some join table rows.
+```
+sqlite> SELECT article_id, tag_id, created_at FROM article_tag LIMIT 5;
+article_id  tag_id      created_at                    
+----------  ----------  ------------------------------
+1           1           2019-06-07 01:14:09.986 +00:00
+1           2           2019-06-07 01:14:09.986 +00:00
+1           3           2019-06-07 01:14:09.986 +00:00
+2           1           2019-06-07 01:14:10.014 +00:00
+2           4           2019-06-07 01:14:10.014 +00:00
+```

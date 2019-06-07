@@ -10,11 +10,6 @@ const articleSetOne = [
     tags: ['javascript', 'async/await', 'asynchronous'],
   },
   {
-    title: 'Michael Oakeshott and the Intellectual Roots of Postmodern Conservatism',
-    uniformResourceLocator: 'https://quillette.com/2019/05/25/michael-oakeshott-and-the-intellectual-roots-of-postmodern-conservatism/',
-    tags: ['politics', 'conservatism', 'quillette', 'michael oakeshott', 'postmodernism'],
-  },
-  {
     title: 'Setting Default Values with JavaScript’s Destructuring',
     uniformResourceLocator: 'https://wesbos.com/destructuring-default-values/',
     tags: ['javascript', 'destructuring'],
